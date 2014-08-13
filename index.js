@@ -44,14 +44,13 @@ module.exports.prototype.play = function (options) {
 
 module.exports.prototype.download = function (newfilename) {
     this.stopped = false;
-    var args = [this.filename]
-      , argsString = '';
+    var params = arguments;
 
-    argString = ' -dumpstream ' + this.filename + '-dumpfile ' + newfilename;
+    var argString = ' -dumpstream ' + this.filename + '-dumpfile ' + newfilename;
     this.process = exec('mplayer' + argString, {encoding: 'binary', maxBuffer: 5000*1024});
     this.process.on('exit', function (code, sig) {
         if (code !== null && sig === null) {
-            this.emit('complete');
+            this.emit('complete', params);
         }
     }.bind(this));
 };
