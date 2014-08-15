@@ -46,7 +46,7 @@ module.exports.prototype.download = function (params) {
     this.stopped = false;
     var params = params;
     var addArgs = ''; 
-    for ( prop : params.options ) {
+    for ( prop in params.options ) {
         addArgs = addArgs + ' -' + prop + ' ' + params[prop];
     }
 
