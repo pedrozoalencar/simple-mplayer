@@ -15,6 +15,7 @@ var exec = require('child_process').exec,
 module.exports = function Media(filename) {
     events.EventEmitter.call(this);
     this.filename = filename;
+    this.params = {};
 };
 
 util.inherits(module.exports, events.EventEmitter);
@@ -44,10 +45,10 @@ module.exports.prototype.play = function (options) {
 
 module.exports.prototype.download = function (params) {
     this.stopped = false;
-    var params = params;
+    this.params = params;
     var addArgs = ''; 
     for ( prop in params.options ) {
-        addArgs = addArgs + ' -' + prop + ' ' + params[prop];
+        addArgs = addArgs + ' -' + prop + ' ' + params.options[prop];
     }
 
 
