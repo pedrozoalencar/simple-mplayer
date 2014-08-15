@@ -42,11 +42,16 @@ module.exports.prototype.play = function (options) {
     }.bind(this));
 };
 
-module.exports.prototype.download = function (newfilename) {
+module.exports.prototype.download = function (params) {
     this.stopped = false;
-    var params = arguments;
+    var params = params;
+    var addArgs = ''; 
+    for ( prop : params.options ) {
+        addArgs = addArgs + ' -' + prop + ' ' + params[addArgs];
+    }
 
-    var argString = 'mplayer -dumpstream ' + this.filename + ' -dumpfile ' + newfilename;
+
+    var argString = 'mplayer -dumpstream ' + params.filename + ' -dumpfile ' + params.newfilename + addArgs;
     console.log('argString to exec: '+ argString);
 
     this.process = exec(argString, {encoding: 'binary', maxBuffer: 5000*1024});
