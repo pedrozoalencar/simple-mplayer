@@ -51,7 +51,7 @@ module.exports.prototype.download = function (params) {
     }
 
 
-    var argString = 'mplayer -dumpstream ' + filename + ' -dumpfile ' + params.newfilename + addArgs;
+    var argString = 'mplayer -dumpstream ' + this.filename + ' -dumpfile ' + params.newfilename + addArgs;
     console.log('argString to exec: '+ argString);
 
     this.process = exec(argString, {encoding: 'binary', maxBuffer: 5000*1024});
